@@ -17,7 +17,7 @@ namespace PersonApp.BL
         {
             if (context == null)
             {
-                context = new DataBaseContext();
+                context = new DataBaseContext(null);
                 _objectSet = context.Set<T>();
             }
         }

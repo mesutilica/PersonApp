@@ -6,14 +6,18 @@ namespace PersonApp.DAL
 {
     public class DataBaseContext : DbContext
     {
+        public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
+        {
+
+        }
         public DbSet<Person> People { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Report> Reports { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(LocalDB)\MSSQLLocalDB; Database=AspNetCoreWebApplication; Trusted_Connection=True; MultipleActiveResultSets=true");
-            base.OnConfiguring(optionsBuilder);
+            optionsBuilder.UseSqlServer(@"Server=(LocalDB)\MSSQLLocalDB; Database=PersonApp; Trusted_Connection=True; MultipleActiveResultSets=true");
+            //base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
