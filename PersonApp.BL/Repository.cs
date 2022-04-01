@@ -17,7 +17,7 @@ namespace PersonApp.BL
         {
             if (context == null)
             {
-                context = new DataBaseContext(null);
+                context = new DataBaseContext();
                 _objectSet = context.Set<T>();
             }
         }
@@ -93,16 +93,14 @@ namespace PersonApp.BL
             return await _objectSet.FindAsync(id);
         }
 
-        public int Remove(T entity)
+        public void Remove(T entity)
         {
             _objectSet.Remove(entity);
-            return context.SaveChanges();
         }
 
-        public int Update(T entity)
+        public void Update(T entity)
         {
             _objectSet.Update(entity);
-            return context.SaveChanges();
         }
 
         public T Get()
@@ -118,6 +116,11 @@ namespace PersonApp.BL
         public async Task<T> GetIncludeAsync(string table, Expression<Func<T, bool>> expression)
         {
             return await _objectSet.Include(table).FirstOrDefaultAsync(expression);
+        }
+
+        public async Task<int> SaveChangesAsync()
+        {
+            return await context.SaveChangesAsync();
         }
     }
 }

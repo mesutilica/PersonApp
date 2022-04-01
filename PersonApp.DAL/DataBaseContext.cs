@@ -6,6 +6,10 @@ namespace PersonApp.DAL
 {
     public class DataBaseContext : DbContext
     {
+        public DataBaseContext()
+        {
+
+        }
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options)
         {
 

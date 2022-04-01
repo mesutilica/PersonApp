@@ -15,8 +15,8 @@ namespace PersonApp.BL
         T GetInclude(string table, Expression<Func<T, bool>> expression);
         T Find(int id);
         int Add(T entity);
-        int Update(T entity);
-        int Remove(T entity);
+        void Update(T entity);
+        void Remove(T entity);
         IQueryable<T> GetAllInclude(string table);
 
         Task<T> FindAsync(int id);
@@ -28,5 +28,6 @@ namespace PersonApp.BL
         Task<IEnumerable<T>> GetAllIncludeAsync(string table, Expression<Func<T, bool>> expression);
         Task<int> AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
+        Task<int> SaveChangesAsync();
     }
 }

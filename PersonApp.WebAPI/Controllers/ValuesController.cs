@@ -14,18 +14,18 @@ namespace PersonApp.WebAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private readonly IRepository<AppUser> _contactService;
+        private readonly IRepository<AppUser> _appUser;
 
         public ValuesController(IRepository<AppUser> contactService)
         {
-            _contactService = contactService;
+            _appUser = contactService;
         }
 
         // GET: api/<ValuesController>
         [HttpGet]
         public async Task<IEnumerable<AppUser>> GetAppUsers()
         {
-            var list = await _contactService.GetAllAsync();
+            var list = await _appUser.GetAllAsync();
             return list;
         }
         //public IEnumerable<string> Get()

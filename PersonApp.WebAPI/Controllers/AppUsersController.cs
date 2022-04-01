@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PersonApp.BL;
 using PersonApp.DAL;
 using PersonApp.Entities;
 
@@ -14,25 +15,31 @@ namespace PersonApp.WebAPI.Controllers
     [ApiController]
     public class AppUsersController : ControllerBase
     {
-        private readonly DataBaseContext _context;
+        //private readonly DataBaseContext _context;
+        private readonly IRepository<AppUser> _appUser;
 
-        public AppUsersController(DataBaseContext context)
+        public AppUsersController(IRepository<AppUser> appUser)
         {
-            _context = context;
+            _appUser = appUser;
         }
+
+        //public AppUsersController(DataBaseContext context)
+        //{
+        //    _context = context;
+        //}
 
         // GET: api/AppUsers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AppUser>>> GetAppUsers()
+        public async Task<IEnumerable<AppUser>> GetAppUsers()
         {
-            return await _context.AppUsers.ToListAsync();
+            return await _appUser.GetAllAsync();
         }
 
         // GET: api/AppUsers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetAppUser(int id)
         {
-            var appUser = await _context.AppUsers.FindAsync(id);
+            var appUser = await _appUser.FindAsync(id);
 
             if (appUser == null)
             {
@@ -42,8 +49,6 @@ namespace PersonApp.WebAPI.Controllers
             return appUser;
         }
 
-        // PUT: api/AppUsers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAppUser(int id, AppUser appUser)
         {
@@ -52,34 +57,16 @@ namespace PersonApp.WebAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(appUser).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AppUserExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
+            _appUser.Update(appUser);
+            await _appUser.SaveChangesAsync();
             return NoContent();
         }
 
         // POST: api/AppUsers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<AppUser>> PostAppUser(AppUser appUser)
         {
-            _context.AppUsers.Add(appUser);
-            await _context.SaveChangesAsync();
+           await _appUser.AddAsync(appUser);
 
             return CreatedAtAction("GetAppUser", new { id = appUser.Id }, appUser);
         }
@@ -88,21 +75,17 @@ namespace PersonApp.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAppUser(int id)
         {
-            var appUser = await _context.AppUsers.FindAsync(id);
+            var appUser = await _appUser.FindAsync(id);
             if (appUser == null)
             {
                 return NotFound();
             }
 
-            _context.AppUsers.Remove(appUser);
-            await _context.SaveChangesAsync();
+            _appUser.Remove(appUser);
+            await _appUser.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool AppUserExists(int id)
-        {
-            return _context.AppUsers.Any(e => e.Id == id);
-        }
     }
 }
