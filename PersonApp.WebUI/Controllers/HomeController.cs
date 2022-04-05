@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using PersonApp.Entities;
 using PersonApp.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -20,13 +22,26 @@ namespace PersonApp.WebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> AppUsersAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("");
-            return View();
+            var responseMessage = await client.GetAsync("http://localhost:21121/api/AppUsers");
+            if (responseMessage.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var result = JsonConvert.DeserializeObject<List<AppUser>>(jsonData);
+                return View(result);
+            }
+            else
+            {
+                return View(null);
+            }
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
         public IActionResult Privacy()
         {
             return View();

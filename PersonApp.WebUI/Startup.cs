@@ -1,12 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PersonApp.WebUI
 {
@@ -24,6 +21,7 @@ namespace PersonApp.WebUI
         {
             services.AddHttpClient(); // Controller da Ihttpclientfactory kullanabilmek için
             services.AddControllersWithViews();
+            services.AddDbContext<DAL.DataBaseContext>(options => options.UseSqlServer());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
