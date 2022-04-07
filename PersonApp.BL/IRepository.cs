@@ -26,7 +26,7 @@ namespace PersonApp.BL
         Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>> expression);
         Task<IEnumerable<T>> GetAllIncludeAsync(string table);
         Task<IEnumerable<T>> GetAllIncludeAsync(string table, Expression<Func<T, bool>> expression);
-        Task<int> AddAsync(T entity);
+        Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
         Task<int> SaveChangesAsync();
     }

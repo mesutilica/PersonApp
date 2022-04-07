@@ -27,10 +27,9 @@ namespace PersonApp.BL
             return context.SaveChanges();
         }
 
-        public async Task<int> AddAsync(T entity)
+        public async Task AddAsync(T entity)
         {
             await _objectSet.AddAsync(entity);
-            return await context.SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(IEnumerable<T> entities)

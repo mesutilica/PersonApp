@@ -15,8 +15,7 @@ namespace PersonApp.Entities
         [Display(Name = "Firma"), StringLength(15)]
         public string Company { get; set; }
         [Display(Name = "Eklenme Tarihi"), ScaffoldColumn(false)]
-        public DateTime CreateDate { get; set; }
-        public int ContactId { get; set; }
+        public DateTime? CreateDate { get; set; } = DateTime.Now;
         public virtual List<Contact> Contacts { get; set; }
     }
 }

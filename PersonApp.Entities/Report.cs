@@ -7,7 +7,7 @@ namespace PersonApp.Entities
     {
         public int Id { get; set; }
         [Display(Name = "Kayıt Tarihi"), ScaffoldColumn(false)]
-        public DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; } = DateTime.Now;
         public ReportStatus ReportStatus { get; set; }
     }
 }

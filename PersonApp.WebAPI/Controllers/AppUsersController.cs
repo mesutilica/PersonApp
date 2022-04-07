@@ -16,11 +16,11 @@ namespace PersonApp.WebAPI.Controllers
     public class AppUsersController : ControllerBase
     {
         //private readonly DataBaseContext _context;
-        private readonly IRepository<AppUser> _appUser;
+        private readonly IRepository<AppUser> _repository;
 
         public AppUsersController(IRepository<AppUser> appUser)
         {
-            _appUser = appUser;
+            _repository = appUser;
         }
 
         //public AppUsersController(DataBaseContext context)
@@ -32,14 +32,14 @@ namespace PersonApp.WebAPI.Controllers
         [HttpGet]
         public async Task<IEnumerable<AppUser>> GetAppUsers()
         {
-            return await _appUser.GetAllAsync();
+            return await _repository.GetAllAsync();
         }
 
         // GET: api/AppUsers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AppUser>> GetAppUser(int id)
         {
-            var appUser = await _appUser.FindAsync(id);
+            var appUser = await _repository.FindAsync(id);
 
             if (appUser == null)
             {
@@ -49,6 +49,7 @@ namespace PersonApp.WebAPI.Controllers
             return appUser;
         }
 
+        // PUT: api/AppUsers/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAppUser(int id, AppUser appUser)
         {
@@ -57,8 +58,8 @@ namespace PersonApp.WebAPI.Controllers
                 return BadRequest();
             }
 
-            _appUser.Update(appUser);
-            await _appUser.SaveChangesAsync();
+            _repository.Update(appUser);
+            await _repository.SaveChangesAsync();
             return NoContent();
         }
 
@@ -66,8 +67,8 @@ namespace PersonApp.WebAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<AppUser>> PostAppUser(AppUser appUser)
         {
-           await _appUser.AddAsync(appUser);
-
+            await _repository.AddAsync(appUser);
+            await _repository.SaveChangesAsync();
             return CreatedAtAction("GetAppUser", new { id = appUser.Id }, appUser);
         }
 
@@ -75,14 +76,14 @@ namespace PersonApp.WebAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAppUser(int id)
         {
-            var appUser = await _appUser.FindAsync(id);
+            var appUser = await _repository.FindAsync(id);
             if (appUser == null)
             {
                 return NotFound();
             }
 
-            _appUser.Remove(appUser);
-            await _appUser.SaveChangesAsync();
+            _repository.Remove(appUser);
+            await _repository.SaveChangesAsync();
 
             return NoContent();
         }

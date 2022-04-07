@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace PersonApp.Entities
 {
@@ -22,6 +23,6 @@ namespace PersonApp.Entities
         [Display(Name = "Admin?")]
         public bool IsAdmin { get; set; }
         [Display(Name = "Eklenme Tarihi"), ScaffoldColumn(false)]
-        public System.DateTime CreateDate { get; set; }
+        public DateTime? CreateDate { get; set; } = DateTime.Now;
     }
 }
