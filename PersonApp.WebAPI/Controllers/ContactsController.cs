@@ -25,7 +25,7 @@ namespace PersonApp.WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<IEnumerable<Contact>> GetContacts(int id)
         {
-            return await _repository.GetAllAsync(c => c.PersontId == id);
+            return await _repository.GetAllAsync(c => c.PersonId == id);
         }
 
         // GET: api/Contacts/5

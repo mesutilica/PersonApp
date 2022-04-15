@@ -11,7 +11,7 @@ namespace PersonApp.Entities
         public InfoType InfoType { get; set; }
         [Display(Name = "Kayıt Tarihi"), ScaffoldColumn(false)]
         public DateTime? CreateDate { get; set; } = DateTime.Now;
-        public int PersontId { get; set; }
+        public int PersonId { get; set; }
         public virtual Person Person{ get; set; }
     }
 }

@@ -20,6 +20,11 @@ namespace PersonApp.WebUI.Controllers
         // GET: Contacts
         public async Task<IActionResult> Index(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewBag.PersonId = id;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:21121/api/Contacts/{id}");
             if (responseMessage.StatusCode == System.Net.HttpStatusCode.OK)
@@ -57,9 +62,13 @@ namespace PersonApp.WebUI.Controllers
         }
 
         // GET: Contacts/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
-
+            if (id == null)
+            {
+                return NotFound();
+            }
+            ViewBag.PersonId = id;
             return View();
         }
 
@@ -68,6 +77,7 @@ namespace PersonApp.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Contact contact)
         {
+            contact.Id = 0;
             if (ModelState.IsValid)
             {
                 var client = _httpClientFactory.CreateClient();
@@ -76,7 +86,7 @@ namespace PersonApp.WebUI.Controllers
                 var responseMessage = await client.PostAsync("http://localhost:21121/api/Contacts/", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index), new { id = contact.PersonId });
                 }
                 else
                 {
@@ -95,7 +105,7 @@ namespace PersonApp.WebUI.Controllers
             }
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"http://localhost:21121/api/Contacts/{id}");
+            var responseMessage = await client.GetAsync($"http://localhost:21121/api/Contacts/GetContact/{id}");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -124,7 +134,7 @@ namespace PersonApp.WebUI.Controllers
                 var responseMessage = await client.PutAsync($"http://localhost:21121/api/Contacts/{id}", stringContent);
                 if (responseMessage.IsSuccessStatusCode)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(Index), new { id = contact.PersonId });
                 }
                 else
                 {
@@ -143,7 +153,7 @@ namespace PersonApp.WebUI.Controllers
             }
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync($"http://localhost:21121/api/Contacts/{id}");
+            var responseMessage = await client.GetAsync($"http://localhost:21121/api/Contacts/GetContact/{id}");
 
             if (responseMessage.IsSuccessStatusCode)
             {
@@ -157,11 +167,11 @@ namespace PersonApp.WebUI.Controllers
         // POST: Contacts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id, int PersonId)
         {
             var client = _httpClientFactory.CreateClient();
             await client.DeleteAsync($"http://localhost:21121/api/Contacts/{id}");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { id = PersonId });
         }
 
     }
