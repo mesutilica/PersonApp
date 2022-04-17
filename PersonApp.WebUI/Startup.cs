@@ -21,7 +21,7 @@ namespace PersonApp.WebUI
         {
             services.AddHttpClient(); // Controller da Ihttpclientfactory kullanabilmek için
             services.AddControllersWithViews();
-            services.AddDbContext<DAL.DataBaseContext>(options => options.UseSqlServer());
+            services.AddDbContext<DAL.DataBaseContext>();//options => options.UseSqlServer()
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

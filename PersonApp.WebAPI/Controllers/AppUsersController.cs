@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using PersonApp.BL;
-using PersonApp.DAL;
 using PersonApp.Entities;
 
 namespace PersonApp.WebAPI.Controllers
@@ -15,18 +10,12 @@ namespace PersonApp.WebAPI.Controllers
     [ApiController]
     public class AppUsersController : ControllerBase
     {
-        //private readonly DataBaseContext _context;
         private readonly IRepository<AppUser> _repository;
 
         public AppUsersController(IRepository<AppUser> appUser)
         {
             _repository = appUser;
         }
-
-        //public AppUsersController(DataBaseContext context)
-        //{
-        //    _context = context;
-        //}
 
         // GET: api/AppUsers
         [HttpGet]

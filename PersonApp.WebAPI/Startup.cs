@@ -29,7 +29,7 @@ namespace PersonApp.WebAPI
         {
 
             services.AddControllers();
-            services.AddDbContext<DAL.DataBaseContext>(options => options.UseSqlServer());
+            services.AddDbContext<DAL.DataBaseContext>();//options => options.UseSqlServer()
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddSwaggerGen(c =>
             {
