@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonApp.WebUI", "PersonApp.WebUI\PersonApp.WebUI.csproj", "{157E5E5C-5E6F-4401-A1B1-75088F7F05E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonApp.WebUI", "PersonApp.WebUI\PersonApp.WebUI.csproj", "{157E5E5C-5E6F-4401-A1B1-75088F7F05E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonApp.WebAPI", "PersonApp.WebAPI\PersonApp.WebAPI.csproj", "{324B34C8-53D0-4DC6-BD1C-FDB103C6E731}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonApp.WebAPI", "PersonApp.WebAPI\PersonApp.WebAPI.csproj", "{324B34C8-53D0-4DC6-BD1C-FDB103C6E731}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonApp.Entities", "PersonApp.Entities\PersonApp.Entities.csproj", "{4C95F502-DD48-425D-81B5-77CA5BD4416F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonApp.Entities", "PersonApp.Entities\PersonApp.Entities.csproj", "{4C95F502-DD48-425D-81B5-77CA5BD4416F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonApp.BL", "PersonApp.BL\PersonApp.BL.csproj", "{1F615715-18FC-40A0-8413-C97AEF7F011C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonApp.BL", "PersonApp.BL\PersonApp.BL.csproj", "{1F615715-18FC-40A0-8413-C97AEF7F011C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonApp.DAL", "PersonApp.DAL\PersonApp.DAL.csproj", "{CEFA43DC-122D-4ABB-A729-0D17E0B8258F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PersonApp.DAL", "PersonApp.DAL\PersonApp.DAL.csproj", "{CEFA43DC-122D-4ABB-A729-0D17E0B8258F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{01867B98-650F-4856-B049-C85949C02339}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{CEFA43DC-122D-4ABB-A729-0D17E0B8258F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEFA43DC-122D-4ABB-A729-0D17E0B8258F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CEFA43DC-122D-4ABB-A729-0D17E0B8258F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01867B98-650F-4856-B049-C85949C02339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01867B98-650F-4856-B049-C85949C02339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01867B98-650F-4856-B049-C85949C02339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01867B98-650F-4856-B049-C85949C02339}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
